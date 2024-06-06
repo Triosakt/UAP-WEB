@@ -16,7 +16,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Trio Rental</title>
+	<title>PSphere</title>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -25,7 +25,7 @@
 	<!-- header -->
 	<header class="header">
 		<div class="container d-flex justify-content-between align-items-center">
-			<h1><a href="dashboard.php">Trio Rental</a></h1>
+			<h1><a href="dashboard.php">PSphere</a></h1>
 			<ul class="nav">
 				<li class="nav-item"><a href="dashboard.php" class="nav-link">Dashboard</a></li>
 				<li class="nav-item"><a href="profil.php" class="nav-link">Profil</a></li>
@@ -69,7 +69,7 @@
 	<!-- footer -->
 	<footer class="footer">
 		<div class="container">
-			<small>&copy; 2024 Trio Rental. All Rights Reserved.</small>
+			<small>&copy; 2024 PSphere. All Rights Reserved.</small>
 		</div>
 	</footer>
 
