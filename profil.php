@@ -72,7 +72,7 @@
 			<h1><a href="dashboard.php">Trio Rental</a></h1>
 			<ul class="nav">
 				<li class="nav-item"><a href="dashboard.php" class="nav-link">Dashboard</a></li>
-				<li class="nav-item"><a href="profil.php" class="nav-link">Profil</a></li>
+				<li class="nav-item"><a href="profil.php" class="nav-link">Profile</a></li>
 				<li class="nav-item"><a href="data-kategori.php" class="nav-link">Data Kategori</a></li>
 				<li class="nav-item"><a href="data-produk.php" class="nav-link">Data Produk</a></li>
 				<li class="nav-item"><a href="keluar.php" class="nav-link">Keluar</a></li>
@@ -83,7 +83,7 @@
 	<!-- content -->
 	<div class="section my-5">
 		<div class="container">
-			<h3>Profil</h3>
+			<h3>Profile</h3>
 			<div class="box p-4 bg-light">
 				<form action="" method="POST" enctype="multipart/form-data">
 					<div class="form-group">

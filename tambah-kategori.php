@@ -14,11 +14,6 @@
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<style>
-		body {
-			font-family: 'Quicksand', sans-serif;
-		}
-	</style>
 </head>
 <body>
 	<!-- header -->

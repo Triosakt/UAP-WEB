@@ -46,7 +46,7 @@
 						<label for="nama">Nama Kategori</label>
 						<input type="text" name="nama" id="nama" class="form-control" placeholder="Nama Kategori" value="<?php echo $k->category_name ?>" required>
 					</div>
-					<button type="submit" name="submit" class="btn btn-primary">Submit</button>
+					<button type="submit" name="submit" class="btn btn-primary">Edit</button>
 				</form>
 				<?php 
 					if(isset($_POST['submit'])){
