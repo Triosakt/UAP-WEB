@@ -48,10 +48,37 @@
 		}
 
 		if($update){
+			// Ambil ulang data admin setelah update
+			$query = mysqli_query($conn, "SELECT * FROM tb_admin WHERE admin_id = '".$d->admin_id."' ");
+			$d = mysqli_fetch_object($query);
+
+			// Perbarui session admin_name
+			$_SESSION['a_global']->admin_name = $d->admin_name;
+
 			echo '<script>alert("Ubah data berhasil")</script>';
 			echo '<script>window.location="profil.php"</script>';
 		} else {
 			echo 'gagal '.mysqli_error($conn);
+		}
+	}
+
+	// Proses perubahan password
+	if(isset($_POST['ubah_password'])){
+		$pass1 	= $_POST['pass1'];
+		$pass2 	= $_POST['pass2'];
+
+		if($pass2 != $pass1){
+			echo '<script>alert("Konfirmasi Password Baru tidak sesuai")</script>';
+		} else {
+			$u_pass = mysqli_query($conn, "UPDATE tb_admin SET 
+						password = '".MD5($pass1)."'
+						WHERE admin_id = '".$d->admin_id."' ");
+			if($u_pass){
+				echo '<script>alert("Ubah password berhasil")</script>';
+				echo '<script>window.location="profil.php"</script>';
+			} else {
+				echo 'gagal '.mysqli_error($conn);
+			}
 		}
 	}
 ?>
@@ -148,5 +175,11 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script>
+		// Script untuk me-refresh halaman setelah proses update profil selesai
+		if(window.history.replaceState){
+			window.history.replaceState(null, null, window.location.href);
+		}
+	</script>
 </body>
 </html>
