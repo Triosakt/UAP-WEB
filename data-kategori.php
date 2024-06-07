@@ -36,9 +36,9 @@
         <div class="container">
             <h3>Data Kategori</h3>
             <div class="box">
-                <p><a href="tambah-kategori.php" class="btn btn-primary mb-3">Tambah Data</a></p>
+                <p><a href="tambah-kategori.php" class="btn btn-primary mb-3">Tambah Kategori</a></p>
                 <table class="table table-bordered table-hover">
-                    <thead class="thead-dark">
+                    <thead>
                         <tr>
                             <th width="60px">No</th>
                             <th>Kategori</th>
@@ -59,7 +59,7 @@
                                 <a href="edit-kategori.php?id=<?php echo $row['category_id'] ?>" class="btn btn-warning btn-sm">
                                     <i class="bi bi-pencil"></i> 
                                 </a>
-                                <a href="hapus.php?idk=<?php echo $row['category_id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin hapus ?')">
+                                <a href="proses-hapus.php?idk=<?php echo $row['category_id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin hapus ?')">
                                     <i class="bi bi-trash"></i> 
                                 </a>
                             </td>
