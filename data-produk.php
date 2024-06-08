@@ -4,6 +4,15 @@
 	if($_SESSION['status_login'] != true){
 		echo '<script>window.location="login.php"</script>';
 	}
+
+	// Proses pencarian
+	$search = "";
+	if(isset($_GET['search'])){
+		$search = $_GET['search'];
+		$produk = mysqli_query($conn, "SELECT * FROM tb_product LEFT JOIN tb_category USING (category_id) WHERE product_name LIKE '%$search%' ORDER BY product_id DESC");
+	} else {
+		$produk = mysqli_query($conn, "SELECT * FROM tb_product LEFT JOIN tb_category USING (category_id) ORDER BY product_id DESC");
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,11 +24,6 @@
 	<link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-	<style>
-		.section h3 {
-            margin-top: 20px; /* Adjust the value as needed */
-        }
-	</style>
 </head>
 <body>
 	<!-- header -->
@@ -28,7 +32,7 @@
             <h1><a href="dashboard.php">PSphere</a></h1>
             <ul class="nav">
                 <li class="nav-item"><a href="dashboard.php" class="nav-link">Dashboard</a></li>
-                <li class="nav-item"><a href="profil.php" class="nav-link">Profil</a></li>
+                <li class="nav-item"><a href="profil.php" class="nav-link">Profile</a></li>
                 <li class="nav-item"><a href="data-kategori.php" class="nav-link">Data Kategori</a></li>
                 <li class="nav-item"><a href="data-produk.php" class="nav-link">Data Produk</a></li>
                 <li class="nav-item"><a href="keluar.php" class="nav-link">Keluar</a></li>
@@ -41,8 +45,18 @@
 		<div class="container">
 			<h3>Data Produk</h3>
 			<div class="box">
+				<form method="GET" class="mb-3">
+					<div class="input-group">
+						<input type="text" name="search" class="form-control" placeholder="Cari Produk" value="<?php echo htmlspecialchars($search); ?>">
+						<div class="input-group-append">
+							<button type="submit" class="btn btn-primary">
+								<i class="bi bi-search"></i> Cari
+							</button>
+						</div>
+					</div>
+				</form>
 				<a href="tambah-produk.php" class="btn btn-primary mb-3">Tambah Produk</a>
-				<table class="table table-bordered">
+				<table class="table table-bordered table-hover">
 					<thead>
 						<tr>
 							<th>No</th>
@@ -57,7 +71,6 @@
 					<tbody>
 						<?php 
 							$no = 1;
-							$produk = mysqli_query($conn, "SELECT * FROM tb_product LEFT JOIN tb_category USING (category_id) ORDER BY product_id DESC");
 							if(mysqli_num_rows($produk) > 0){
 								while($row = mysqli_fetch_array($produk)){
 						?>
@@ -66,20 +79,20 @@
 							<td><?php echo $row['category_name'] ?></td>
 							<td><?php echo $row['product_name'] ?></td>
 							<td><?php echo $row['product_price'] ?></td>
-							<td><img src="uploads/<?php echo $row['product_image'] ?>" width="100px"></td>
+							<td><img src="produk/<?php echo $row['product_image'] ?>" width="100px"></td>
 							<td><?php echo ($row['product_status'] == 1)? 'Aktif':'Tidak Aktif'; ?></td>
 							<td>
-							<a href="edit-produk.php?id=<?php echo $row['product_id'] ?>" class="btn btn-warning btn-sm">
+								<a href="edit-produk.php?id=<?php echo $row['product_id'] ?>" class="btn btn-warning btn-sm">
                                     <i class="bi bi-pencil"></i> 
                                 </a>
-                                <a href="proses-hapus.php?idk=<?php echo $row['product_id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin hapus ?')">
+                                <a href="proses-hapus.php?idp=<?php echo $row['product_id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin hapus ?')">
                                     <i class="bi bi-trash"></i> 
                                 </a>
 							</td>
 						</tr>
 						<?php }}else{ ?>
 						<tr>
-							<td colspan="7">Tidak ada data</td>
+							<td colspan="7" class="text-center">Tidak ada data</td>
 						</tr>
 						<?php } ?>
 					</tbody>
