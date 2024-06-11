@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 06 Jun 2024 pada 14.40
+-- Waktu pembuatan: 11 Jun 2024 pada 19.32
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.2.4
 
@@ -43,7 +43,7 @@ CREATE TABLE `tb_admin` (
 --
 
 INSERT INTO `tb_admin` (`admin_id`, `admin_name`, `username`, `password`, `admin_telp`, `admin_email`, `admin_address`, `gambar`) VALUES
-(1, 'Fajar', 'admin', '21232f297a57a5a743894a0e4a801fc3', '+6289681064258', 'fajaralfad85@gmail.com', 'Jl.padang Pariaman 1', '2.jpeg');
+(1, 'Trio', 'admin', '202cb962ac59075b964b07152d234b70', '+6289681064258', 'fajaralfad85@gmail.com', 'Jl.padang Pariaman 1', 'a k i.jpeg');
 
 -- --------------------------------------------------------
 
@@ -61,7 +61,10 @@ CREATE TABLE `tb_category` (
 --
 
 INSERT INTO `tb_category` (`category_id`, `category_name`) VALUES
-(15, 'Ps');
+(22, 'Playstation'),
+(24, 'Xbox'),
+(25, 'Vr'),
+(26, 'Console');
 
 -- --------------------------------------------------------
 
@@ -73,11 +76,44 @@ CREATE TABLE `tb_product` (
   `product_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   `product_name` varchar(100) NOT NULL,
-  `product_price` int(11) NOT NULL,
+  `product_price` decimal(10,2) NOT NULL,
   `product_image` varchar(100) NOT NULL,
   `product_status` tinyint(1) NOT NULL,
-  `data_created` timestamp NOT NULL DEFAULT current_timestamp()
+  `product_description` text NOT NULL,
+  `date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `tb_product`
+--
+
+INSERT INTO `tb_product` (`product_id`, `category_id`, `product_name`, `product_price`, `product_image`, `product_status`, `product_description`, `date_created`) VALUES
+(1, 26, 'console 1', 30000.00, 'produk1718125623.jpeg', 1, 'barang sangat bagus', '2024-06-11 17:07:03');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_sewa`
+--
+
+CREATE TABLE `tb_sewa` (
+  `sewa_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `jam_sewa` int(11) NOT NULL,
+  `no_hp` varchar(20) NOT NULL,
+  `metode_pembayaran` varchar(50) NOT NULL,
+  `tanggal_sewa` date NOT NULL,
+  `total_harga` decimal(10,2) NOT NULL,
+  `status` enum('diterima','tidak diterima') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `tb_sewa`
+--
+
+INSERT INTO `tb_sewa` (`sewa_id`, `product_id`, `nama`, `jam_sewa`, `no_hp`, `metode_pembayaran`, `tanggal_sewa`, `total_harga`, `status`) VALUES
+(1, 1, 'fajar', 3, '089681064258', 'Transfer Bank', '2024-06-13', 90000.00, NULL);
 
 --
 -- Indexes for dumped tables
@@ -99,8 +135,14 @@ ALTER TABLE `tb_category`
 -- Indeks untuk tabel `tb_product`
 --
 ALTER TABLE `tb_product`
-  ADD PRIMARY KEY (`product_id`),
-  ADD KEY `category_id` (`category_id`);
+  ADD PRIMARY KEY (`product_id`);
+
+--
+-- Indeks untuk tabel `tb_sewa`
+--
+ALTER TABLE `tb_sewa`
+  ADD PRIMARY KEY (`sewa_id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
@@ -116,13 +158,29 @@ ALTER TABLE `tb_admin`
 -- AUTO_INCREMENT untuk tabel `tb_category`
 --
 ALTER TABLE `tb_category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_product`
 --
 ALTER TABLE `tb_product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `tb_sewa`
+--
+ALTER TABLE `tb_sewa`
+  MODIFY `sewa_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `tb_sewa`
+--
+ALTER TABLE `tb_sewa`
+  ADD CONSTRAINT `tb_sewa_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `tb_product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
