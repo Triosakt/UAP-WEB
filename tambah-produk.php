@@ -19,18 +19,18 @@
 <body>
 	<!-- header -->
 	<header class="header">
-        <div class="container d-flex justify-content-between align-items-center">
-            <h1><a href="dashboard.php">PSphere</a></h1>
-            <ul class="nav">
-                <li class="nav-item"><a href="dashboard.php" class="nav-link">Dashboard</a></li>
-                <li class="nav-item"><a href="profil.php" class="nav-link">Profile</a></li>
-                <li class="nav-item"><a href="data-kategori.php" class="nav-link">Data Kategori</a></li>
-                <li class="nav-item"><a href="data-produk.php" class="nav-link">Data Produk</a></li>
-                <li class="nav-item"><a href="keluar.php" class="nav-link">Keluar</a></li>
-            </ul>
-        </div>
-    </header>
-
+		<div class="container d-flex justify-content-between align-items-center">
+			<h1><a href="dashboard.php">PSphere</a></h1>
+			<ul class="nav">
+				<li class="nav-item"><a href="dashboard.php" class="nav-link">Dashboard</a></li>
+				<li class="nav-item"><a href="profil.php" class="nav-link">Profile</a></li>
+				<li class="nav-item"><a href="data-kategori.php" class="nav-link">Data Kategori</a></li>
+				<li class="nav-item"><a href="data-produk.php" class="nav-link">Data Produk</a></li>
+				<li class="nav-item"><a href="data-sewa.php" class="nav-link">Data Sewa</a></li>
+				<li class="nav-item"><a href="keluar.php" class="nav-link">Keluar</a></li>
+			</ul>
+		</div>
+	</header>
 	<!-- content -->
 	<div class="section my-5">
 		<div class="container">
@@ -62,6 +62,10 @@
 						<input type="file" name="gambar" class="form-control-file" id="gambar" required>
 					</div>
 					<div class="form-group">
+						<label for="deskripsi">Deskripsi</label>
+						<textarea name="deskripsi" class="form-control" id="deskripsi" rows="5" placeholder="Deskripsi Produk"></textarea>
+					</div>
+					<div class="form-group">
 						<label for="status">Status</label>
 						<select class="form-control" name="status" id="status">
 							<option value="">--Pilih--</option>
@@ -73,12 +77,12 @@
 				</form>
 				<?php 
 					if(isset($_POST['submit'])){
-						// print_r($_FILES['gambar']);
 						// menampung inputan dari form
 						$kategori 	= $_POST['kategori'];
 						$nama 		= $_POST['nama'];
 						$harga 		= $_POST['harga'];
 						$status 	= $_POST['status'];
+						$deskripsi  = $_POST['deskripsi'];
 
 						// menampung data file yang diupload
 						$filename = $_FILES['gambar']['name'];
@@ -102,14 +106,13 @@
 							// proses upload file sekaligus insert ke database
 							move_uploaded_file($tmp_name, './produk/'.$newname);
 
-							$insert = mysqli_query($conn, "INSERT INTO tb_product VALUES (
-										null,
+							$insert = mysqli_query($conn, "INSERT INTO tb_product (category_id, product_name, product_price, product_image, product_status, product_description) VALUES (
 										'".$kategori."',
 										'".$nama."',
 										'".$harga."',
 										'".$newname."',
 										'".$status."',
-										null
+										'".$deskripsi."'
 											) ");
 
 							if($insert){

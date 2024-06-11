@@ -31,6 +31,7 @@
 				<li class="nav-item"><a href="profil.php" class="nav-link">Profile</a></li>
 				<li class="nav-item"><a href="data-kategori.php" class="nav-link">Data Kategori</a></li>
 				<li class="nav-item"><a href="data-produk.php" class="nav-link">Data Produk</a></li>
+				<li class="nav-item"><a href="data-sewa.php" class="nav-link">Data Sewa</a></li>
 				<li class="nav-item"><a href="keluar.php" class="nav-link">Keluar</a></li>
 			</ul>
 		</div>
@@ -73,6 +74,11 @@
 					</div>
 
 					<div class="form-group">
+						<label for="deskripsi">Deskripsi Produk</label>
+						<textarea name="deskripsi" id="deskripsi" class="form-control" rows="5" placeholder="Deskripsi Produk"><?php echo $p->product_description ?></textarea>
+					</div>
+
+					<div class="form-group">
 						<label for="status">Status</label>
 						<select class="form-control" name="status">
 							<option value="">--Pilih--</option>
@@ -91,6 +97,7 @@
 						$harga 		= $_POST['harga'];
 						$status 	= $_POST['status'];
 						$foto 		= $_POST['foto'];
+						$deskripsi 	= $_POST['deskripsi'];
 
 						// data gambar yang baru
 						$filename = $_FILES['gambar']['name'];
@@ -122,14 +129,15 @@
 							$namagambar = $foto;
 						}
 
-						// query update data produk
 						$update = mysqli_query($conn, "UPDATE tb_product SET 
-												category_id = '".$kategori."',
-												product_name = '".$nama."',
-												product_price = '".$harga."',
-												product_image = '".$namagambar."',
-												product_status = '".$status."'
-												WHERE product_id = '".$p->product_id."'	");
+                        category_id = '".$kategori."',
+                        product_name = '".$nama."',
+                        product_price = '".$harga."',
+                        product_image = '".$namagambar."',
+                        product_description = '".$deskripsi."', 
+                        product_status = '".$status."'
+                        WHERE product_id = '".$p->product_id."' ");
+
 						if($update){
 							echo '<script>alert("Ubah data berhasil")</script>';
 							echo '<script>window.location="data-produk.php"</script>';

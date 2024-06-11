@@ -28,18 +28,18 @@
 <body>
 	<!-- header -->
 	<header class="header">
-        <div class="container d-flex justify-content-between align-items-center">
-            <h1><a href="dashboard.php">PSphere</a></h1>
-            <ul class="nav">
-                <li class="nav-item"><a href="dashboard.php" class="nav-link">Dashboard</a></li>
-                <li class="nav-item"><a href="profil.php" class="nav-link">Profile</a></li>
-                <li class="nav-item"><a href="data-kategori.php" class="nav-link">Data Kategori</a></li>
-                <li class="nav-item"><a href="data-produk.php" class="nav-link">Data Produk</a></li>
-                <li class="nav-item"><a href="keluar.php" class="nav-link">Keluar</a></li>
-            </ul>
-        </div>
-    </header>
-
+		<div class="container d-flex justify-content-between align-items-center">
+			<h1><a href="dashboard.php">PSphere</a></h1>
+			<ul class="nav">
+				<li class="nav-item"><a href="dashboard.php" class="nav-link">Dashboard</a></li>
+				<li class="nav-item"><a href="profil.php" class="nav-link">Profile</a></li>
+				<li class="nav-item"><a href="data-kategori.php" class="nav-link">Data Kategori</a></li>
+				<li class="nav-item"><a href="data-produk.php" class="nav-link">Data Produk</a></li>
+				<li class="nav-item"><a href="data-sewa.php" class="nav-link">Data Sewa</a></li>
+				<li class="nav-item"><a href="keluar.php" class="nav-link">Keluar</a></li>
+			</ul>
+		</div>
+	</header>
 	<!-- content -->
 	<div class="section my-5">
 		<div class="container">
@@ -64,6 +64,7 @@
 							<th>Nama Produk</th>
 							<th>Harga</th>
 							<th>Gambar</th>
+							<th>Deskripsi</th>
 							<th>Status</th>
 							<th>Aksi</th>
 						</tr>
@@ -80,6 +81,7 @@
 							<td><?php echo $row['product_name'] ?></td>
 							<td><?php echo $row['product_price'] ?></td>
 							<td><img src="produk/<?php echo $row['product_image'] ?>" width="100px"></td>
+							<td><?php echo $row['product_description'] ?></td>
 							<td><?php echo ($row['product_status'] == 1)? 'Aktif':'Tidak Aktif'; ?></td>
 							<td>
 								<a href="edit-produk.php?id=<?php echo $row['product_id'] ?>" class="btn btn-warning btn-sm">
@@ -92,7 +94,7 @@
 						</tr>
 						<?php }}else{ ?>
 						<tr>
-							<td colspan="7" class="text-center">Tidak ada data</td>
+							<td colspan="8" class="text-center">Tidak ada data</td>
 						</tr>
 						<?php } ?>
 					</tbody>

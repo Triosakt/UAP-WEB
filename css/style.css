@@ -73,3 +73,7 @@ h3.mt-5 {
 .dashboard-card h4 {
     margin-top: 10px;
 }
+
+.product-image {
+    max-width: 100%;
+}
