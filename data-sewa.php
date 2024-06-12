@@ -48,9 +48,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h1><a href="dashboard.php">PSphere</a></h1>
             <ul class="nav">
                 <li class="nav-item"><a href="dashboard.php" class="nav-link">Dashboard</a></li>
-                <li class="nav-item"><a href="profil.php" class="nav-link">Profile</a></li>
                 <li class="nav-item"><a href="data-kategori.php" class="nav-link">Data Kategori</a></li>
                 <li class="nav-item"><a href="data-produk.php" class="nav-link">Data Produk</a></li>
+                <li class="nav-item"><a href="data-sewa.php" class="nav-link">Data Sewa</a></li>
                 <li class="nav-item"><a href="keluar.php" class="nav-link">Keluar</a></li>
             </ul>
         </div>
