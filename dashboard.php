@@ -18,6 +18,19 @@ $category_count = mysqli_fetch_assoc($category_count_query)['count'];
 
 $rental_count_query = mysqli_query($conn, "SELECT COUNT(*) as count FROM tb_sewa");
 $rental_count = mysqli_fetch_assoc($rental_count_query)['count'];
+
+// Fetch rental data per month
+$rental_data_query = mysqli_query($conn, "
+    SELECT MONTH(tanggal_sewa) as month, COUNT(*) as count 
+    FROM tb_sewa 
+    WHERE YEAR(tanggal_sewa) = YEAR(CURDATE())
+    GROUP BY MONTH(tanggal_sewa)
+");
+$rental_data = array_fill(1, 12, 0);
+while ($row = mysqli_fetch_assoc($rental_data_query)) {
+	$rental_data[$row['month']] = $row['count'];
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -163,6 +176,23 @@ $rental_count = mysqli_fetch_assoc($rental_count_query)['count'];
 								<p><?php echo $rental_count; ?></p>
 							</div>
 						</div>
+						<!-- Sales overview card -->
+						<div class="card mb-4 draggable">
+							<div class="card-header pb-0 d-flex align-items-center">
+								<div>
+									<h6 class="mb-1">Sales overview</h6>
+									<p class="text-sm mb-0">
+										(+32%) more in 2021
+									</p>
+								</div>
+							</div>
+							<div class="card-body p-3">
+								<div class="chart">
+									<canvas class="chart-line" class="chart-canvas" height="300"></canvas>
+								</div>
+							</div>
+						</div>
+						<!-- End of Sales overview card -->
 					</div>
 				</div>
 			</div>
@@ -178,6 +208,79 @@ $rental_count = mysqli_fetch_assoc($rental_count_query)['count'];
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script>
+		var rentalData = <?php echo json_encode(array_values($rental_data)); ?>;
+		var ctx2 = document.querySelectorAll(".chart-line");
+
+		new Chart(ctx2[ctx2.length - 1], {
+			type: "line",
+			data: {
+				labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+				datasets: [{
+					label: "Penyewaan",
+					tension: 0.4,
+					borderWidth: 0,
+					pointRadius: 0,
+					borderColor: "#00ab55",
+					borderWidth: 3,
+					backgroundColor: "transparent",
+					data: rentalData,
+					maxBarThickness: 6
+				}],
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,
+				legend: {
+					display: false,
+				},
+				tooltips: {
+					enabled: true,
+					mode: "index",
+					intersect: false,
+				},
+				scales: {
+					yAxes: [{
+						gridLines: {
+							borderDash: [2],
+							borderDashOffset: [2],
+							color: '#dee2e6',
+							zeroLineColor: '#dee2e6',
+							zeroLineWidth: 1,
+							zeroLineBorderDash: [2],
+							drawBorder: false,
+						},
+						ticks: {
+							suggestedMin: 0,
+							suggestedMax: 500,
+							beginAtZero: true,
+							padding: 10,
+							fontSize: 11,
+							fontColor: '#adb5bd',
+							lineHeight: 3,
+							fontStyle: 'normal',
+							fontFamily: "Public Sans",
+						},
+					}],
+					xAxes: [{
+						gridLines: {
+							zeroLineColor: 'rgba(0,0,0,0)',
+							display: false,
+						},
+						ticks: {
+							padding: 10,
+							fontSize: 11,
+							fontColor: '#adb5bd',
+							lineHeight: 3,
+							fontStyle: 'normal',
+							fontFamily: "Public Sans",
+						},
+					}],
+				},
+			},
+		});
+	</script>
 </body>
 
 </html>

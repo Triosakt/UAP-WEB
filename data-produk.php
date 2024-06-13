@@ -1,21 +1,22 @@
-<?php 
-	session_start();
-	include 'db.php';
-	if($_SESSION['status_login'] != true){
-		echo '<script>window.location="login.php"</script>';
-	}
+<?php
+session_start();
+include 'db.php';
+if ($_SESSION['status_login'] != true) {
+	echo '<script>window.location="login.php"</script>';
+}
 
-	// Proses pencarian
-	$search = "";
-	if(isset($_GET['search'])){
-		$search = $_GET['search'];
-		$produk = mysqli_query($conn, "SELECT * FROM tb_product LEFT JOIN tb_category USING (category_id) WHERE product_name LIKE '%$search%' ORDER BY product_id DESC");
-	} else {
-		$produk = mysqli_query($conn, "SELECT * FROM tb_product LEFT JOIN tb_category USING (category_id) ORDER BY product_id DESC");
-	}
+// Proses pencarian
+$search = "";
+if (isset($_GET['search'])) {
+	$search = $_GET['search'];
+	$produk = mysqli_query($conn, "SELECT * FROM tb_product LEFT JOIN tb_category USING (category_id) WHERE product_name LIKE '%$search%' ORDER BY product_id DESC");
+} else {
+	$produk = mysqli_query($conn, "SELECT * FROM tb_product LEFT JOIN tb_category USING (category_id) ORDER BY product_id DESC");
+}
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,8 +24,9 @@
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
+
 <body>
 	<!-- header -->
 	<header class="header">
@@ -69,32 +71,33 @@
 						</tr>
 					</thead>
 					<tbody>
-						<?php 
-							$no = 1;
-							if(mysqli_num_rows($produk) > 0){
-								while($row = mysqli_fetch_array($produk)){
+						<?php
+						$no = 1;
+						if (mysqli_num_rows($produk) > 0) {
+							while ($row = mysqli_fetch_array($produk)) {
 						?>
-						<tr>
-							<td><?php echo $no++ ?></td>
-							<td><?php echo $row['category_name'] ?></td>
-							<td><?php echo $row['product_name'] ?></td>
-							<td><?php echo $row['product_price'] ?></td>
-							<td><img src="produk/<?php echo $row['product_image'] ?>" width="100px"></td>
-							<td><?php echo $row['product_description'] ?></td>
-							<td><?php echo ($row['product_status'] == 1)? 'Aktif':'Tidak Aktif'; ?></td>
-							<td>
-								<a href="edit-produk.php?id=<?php echo $row['product_id'] ?>" class="btn btn-warning btn-sm">
-                                    <i class="bi bi-pencil"></i> 
-                                </a>
-                                <a href="proses-hapus.php?idp=<?php echo $row['product_id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin hapus ?')">
-                                    <i class="bi bi-trash"></i> 
-                                </a>
-							</td>
-						</tr>
-						<?php }}else{ ?>
-						<tr>
-							<td colspan="8" class="text-center">Tidak ada data</td>
-						</tr>
+								<tr>
+									<td><?php echo $no++ ?></td>
+									<td><?php echo $row['category_name'] ?></td>
+									<td><?php echo $row['product_name'] ?></td>
+									<td>Rp.<?php echo number_format($row['product_price']) ?></td>
+									<td><img src="produk/<?php echo $row['product_image'] ?>" width="100px"></td>
+									<td><?php echo $row['product_description'] ?></td>
+									<td><?php echo ($row['product_status'] == 1) ? 'Aktif' : 'Tidak Aktif'; ?></td>
+									<td>
+										<a href="edit-produk.php?id=<?php echo $row['product_id'] ?>" class="btn btn-warning btn-sm">
+											<i class="bi bi-pencil"></i>
+										</a>
+										<a href="proses-hapus.php?idp=<?php echo $row['product_id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin hapus ?')">
+											<i class="bi bi-trash"></i>
+										</a>
+									</td>
+								</tr>
+							<?php }
+						} else { ?>
+							<tr>
+								<td colspan="8" class="text-center">Tidak ada data</td>
+							</tr>
 						<?php } ?>
 					</tbody>
 				</table>
@@ -104,13 +107,14 @@
 
 	<!-- footer -->
 	<footer class="footer">
-        <div class="container">
-            <small>&copy; 2024 PSphere. All Rights Reserved.</small>
-        </div>
-    </footer>
+		<div class="container">
+			<small>&copy; 2024 PSphere. All Rights Reserved.</small>
+		</div>
+	</footer>
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

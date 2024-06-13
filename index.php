@@ -77,7 +77,7 @@ include 'db.php';
 								</a>
 								<div class="card-body">
 									<h5 class="card-title"><?php echo htmlspecialchars(substr($p['product_name'], 0, 30)); ?></h5>
-									<p class="card-text">Rp. <?php echo number_format($p['product_price']); ?></p>
+									<p class="card-text">Rp. <?php echo number_format($p['product_price']); ?>/hari</p>
 								</div>
 							</div>
 						</div>
