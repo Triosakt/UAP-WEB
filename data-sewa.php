@@ -32,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,6 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
+
 <body>
     <!-- header -->
     <header class="header">
@@ -81,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <th scope="col">No HP</th>
                                 <th scope="col">Metode Pembayaran</th>
                                 <th scope="col">Tanggal Sewa</th>
-								<th scope="col">Total Harga</th>
+                                <th scope="col">Total Harga</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Aksi</th>
                             </tr>
@@ -91,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $no = 1;
                             if (mysqli_num_rows($result) > 0) {
                                 while ($row = mysqli_fetch_assoc($result)) {
-                                    ?>
+                            ?>
                                     <tr>
                                         <td><?php echo $no++ ?></td>
                                         <td><?php echo $row['product_id'] ?></td>
@@ -100,13 +102,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <td><?php echo $row['no_hp'] ?></td>
                                         <td><?php echo $row['metode_pembayaran'] ?></td>
                                         <td><?php echo $row['tanggal_sewa'] ?></td>
-										<td><?php echo $row['total_harga'] ?></td>
+                                        <td>Rp.<?php echo number_format($row['total_harga']) ?></td>
                                         <td>
-                                            <?php if ($row['status'] == 'diterima'): ?>
+                                            <?php if ($row['status'] == 'diterima') : ?>
                                                 <i class="bi bi-check-circle text-success"></i> Diterima
-                                            <?php elseif ($row['status'] == 'tidak diterima'): ?>
+                                            <?php elseif ($row['status'] == 'tidak diterima') : ?>
                                                 <i class="bi bi-x-circle text-danger"></i> Tidak Diterima
-                                            <?php else: ?>
+                                            <?php else : ?>
                                                 <form action="data-sewa.php" method="POST">
                                                     <input type="hidden" name="sewa_id" value="<?php echo $row['sewa_id']; ?>">
                                                     <select name="status" class="form-control">
@@ -152,4 +154,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

@@ -154,7 +154,7 @@ while ($row = mysqli_fetch_assoc($rental_data_query)) {
 							<img src="https://via.placeholder.com/150" class="rounded-circle" alt="User Image">
 						<?php endif; ?>
 						<h4><?php echo $_SESSION['a_global']->admin_name ?></h4>
-						<p>Selamat Datang di PSphere</p>
+						<p>Selamat Datang Admin !</p>
 						<a href="profil.php" class="btn btn-primary">Edit Profile</a>
 					</div>
 				</div>
