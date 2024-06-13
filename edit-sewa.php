@@ -43,6 +43,7 @@ if (isset($_POST['submit'])) {
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -52,6 +53,7 @@ if (isset($_POST['submit'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
+
 <body>
     <!-- header -->
     <header class="header">
@@ -78,7 +80,7 @@ if (isset($_POST['submit'])) {
                         <input type="text" name="nama" class="form-control" value="<?php echo $s['nama'] ?>" required>
                     </div>
                     <div class="form-group">
-                        <label for="jam_sewa">Jam Sewa</label>
+                        <label for="jam_sewa">Hari</label>
                         <input type="text" name="jam_sewa" class="form-control" value="<?php echo $s['jam_sewa'] ?>" required>
                     </div>
                     <div class="form-group">
@@ -110,4 +112,5 @@ if (isset($_POST['submit'])) {
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

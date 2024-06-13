@@ -63,7 +63,7 @@ include 'db.php';
 	<!-- new product -->
 	<div class="section">
 		<div class="container mb-5">
-			<h3>Produk</h3>
+			<h3>Produk Terbaru</h3>
 			<div class="row">
 				<?php
 				$produk = mysqli_query($conn, "SELECT * FROM tb_product WHERE product_status = 1 ORDER BY product_id DESC LIMIT 8");

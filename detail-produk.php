@@ -1,22 +1,23 @@
-<?php 
-    include 'db.php';
-    $productId = isset($_GET['id']) ? $_GET['id'] : null;
-    if ($productId) {
-        $query = "SELECT * FROM tb_product WHERE product_id = '$productId'";
-        $produk = mysqli_query($conn, $query);
-        if ($produk && mysqli_num_rows($produk) > 0) {
-            $p = mysqli_fetch_object($produk);
-        } else {
-            // Handle case where product is not found
-            $p = null;
-        }
+<?php
+include 'db.php';
+$productId = isset($_GET['id']) ? $_GET['id'] : null;
+if ($productId) {
+    $query = "SELECT * FROM tb_product WHERE product_id = '$productId'";
+    $produk = mysqli_query($conn, $query);
+    if ($produk && mysqli_num_rows($produk) > 0) {
+        $p = mysqli_fetch_object($produk);
     } else {
-        // Handle case where id parameter is not provided
+        // Handle case where product is not found
         $p = null;
     }
+} else {
+    // Handle case where id parameter is not provided
+    $p = null;
+}
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,6 +31,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- header -->
     <header class="header">
@@ -56,7 +58,7 @@
     <div class="section">
         <div class="container mt-3">
             <h3 class="mb-4">Detail Produk</h3>
-            <?php if ($p): ?>
+            <?php if ($p) : ?>
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
@@ -75,7 +77,7 @@
                         </div>
                     </div>
                 </div>
-            <?php else: ?>
+            <?php else : ?>
                 <div class="alert alert-danger mt-4" role="alert">
                     Produk tidak ditemukan.
                 </div>
@@ -95,4 +97,5 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

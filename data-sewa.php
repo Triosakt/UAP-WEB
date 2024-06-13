@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <th scope="col">No</th>
                                 <th scope="col">Product ID</th>
                                 <th scope="col">Nama Pelanggan</th>
-                                <th scope="col">Jam Sewa</th>
+                                <th scope="col">Hari</th>
                                 <th scope="col">No HP</th>
                                 <th scope="col">Metode Pembayaran</th>
                                 <th scope="col">Tanggal Sewa</th>

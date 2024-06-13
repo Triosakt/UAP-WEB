@@ -1,61 +1,62 @@
 <?php
-    // Pastikan file db.php sudah menyediakan koneksi ke database
-    include 'db.php';
+// Pastikan file db.php sudah menyediakan koneksi ke database
+include 'db.php';
 
-    // Ambil data produk jika ada
-    $product_id = isset($_GET['id']) ? $_GET['id'] : null;
-    if ($product_id) {
-        $query = "SELECT * FROM tb_product WHERE product_id = '$product_id'";
-        $produk = mysqli_query($conn, $query);
-        if ($produk && mysqli_num_rows($produk) > 0) {
-            $p = mysqli_fetch_object($produk);
-        } else {
-            // Handle case where product is not found
-            $p = null;
-        }
+// Ambil data produk jika ada
+$product_id = isset($_GET['id']) ? $_GET['id'] : null;
+if ($product_id) {
+    $query = "SELECT * FROM tb_product WHERE product_id = '$product_id'";
+    $produk = mysqli_query($conn, $query);
+    if ($produk && mysqli_num_rows($produk) > 0) {
+        $p = mysqli_fetch_object($produk);
     } else {
+        // Handle case where product is not found
         $p = null;
     }
+} else {
+    $p = null;
+}
 
-    // Proses form jika ada POST request
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Ambil data dari form
-        $product_id = $_POST['product_id'];
-        $nama = mysqli_real_escape_string($conn, $_POST['nama']);
-        $jam = $_POST['jam'];
-        $no_hp = mysqli_real_escape_string($conn, $_POST['no_hp']);
-        $pembayaran = $_POST['pembayaran'];
-        $tanggal_sewa = $_POST['tanggal_sewa']; // Tanggal sewa diambil dari input form
-        $total_harga = $_POST['total_harga']; // Total harga dari input form
+// Proses form jika ada POST request
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Ambil data dari form
+    $product_id = $_POST['product_id'];
+    $nama = mysqli_real_escape_string($conn, $_POST['nama']);
+    $jam = $_POST['jam'];
+    $no_hp = mysqli_real_escape_string($conn, $_POST['no_hp']);
+    $pembayaran = $_POST['pembayaran'];
+    $tanggal_sewa = $_POST['tanggal_sewa']; // Tanggal sewa diambil dari input form
+    $total_harga = $_POST['total_harga']; // Total harga dari input form
 
-        // Validasi data (contoh sederhana, sesuaikan dengan kebutuhan)
-        if (empty($nama) || empty($jam) || empty($no_hp) || empty($pembayaran) || empty($tanggal_sewa) || empty($total_harga)) {
-            // Jika ada data yang kosong, beri pesan error
-            echo '<script>alert("Harap isi semua kolom!")</script>';
-            echo '<script>window.location="sewa.php?id='.$product_id.'"</script>';
-            exit;
-        }
+    // Validasi data (contoh sederhana, sesuaikan dengan kebutuhan)
+    if (empty($nama) || empty($jam) || empty($no_hp) || empty($pembayaran) || empty($tanggal_sewa) || empty($total_harga)) {
+        // Jika ada data yang kosong, beri pesan error
+        echo '<script>alert("Harap isi semua kolom!")</script>';
+        echo '<script>window.location="sewa.php?id=' . $product_id . '"</script>';
+        exit;
+    }
 
-        // Query untuk memasukkan data ke dalam database
-        $query = "INSERT INTO tb_sewa (product_id, nama, jam_sewa, no_hp, metode_pembayaran, tanggal_sewa, total_harga)
+    // Query untuk memasukkan data ke dalam database
+    $query = "INSERT INTO tb_sewa (product_id, nama, jam_sewa, no_hp, metode_pembayaran, tanggal_sewa, total_harga)
                   VALUES ('$product_id', '$nama', '$jam', '$no_hp', '$pembayaran', '$tanggal_sewa', '$total_harga')";
 
-        $result = mysqli_query($conn, $query);
+    $result = mysqli_query($conn, $query);
 
-        if ($result) {
-            // Jika query berhasil dijalankan
-            echo '<script>alert("Berhasil menyewa produk!")</script>';
-            echo '<script>window.location="index.php"</script>';
-        } else {
-            // Jika terjadi error pada query
-            echo '<script>alert("Gagal menyewa produk. Silakan coba lagi!")</script>';
-            echo '<script>window.location="sewa.php?id='.$product_id.'"</script>';
-        }
+    if ($result) {
+        // Jika query berhasil dijalankan
+        echo '<script>alert("Berhasil menyewa produk!")</script>';
+        echo '<script>window.location="index.php"</script>';
+    } else {
+        // Jika terjadi error pada query
+        echo '<script>alert("Gagal menyewa produk. Silakan coba lagi!")</script>';
+        echo '<script>window.location="sewa.php?id=' . $product_id . '"</script>';
     }
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -77,6 +78,7 @@
         }
     </script>
 </head>
+
 <body>
     <!-- header -->
     <header class="header">
@@ -97,8 +99,8 @@
                         <input type="text" name="nama" id="nama" class="form-control" placeholder="Masukkan Nama Anda" required>
                     </div>
                     <div class="form-group">
-                        <label for="jam">Sewa Berapa Jam</label>
-                        <input type="number" name="jam" id="jam" class="form-control" placeholder="Masukkan Jumlah Jam Sewa" required oninput="updateTotalPrice()">
+                        <label for="jam">Sewa Berapa Hari</label>
+                        <input type="number" name="jam" id="jam" class="form-control" placeholder="Masukkan Jumlah Sewa Perhari" required oninput="updateTotalPrice()">
                     </div>
                     <div class="form-group">
                         <label for="no_hp">Nomor HP</label>
@@ -139,4 +141,5 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

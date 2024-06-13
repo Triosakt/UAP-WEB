@@ -181,14 +181,11 @@ while ($row = mysqli_fetch_assoc($rental_data_query)) {
 							<div class="card-header pb-0 d-flex align-items-center">
 								<div>
 									<h6 class="mb-1">Sales overview</h6>
-									<p class="text-sm mb-0">
-										(+32%) more in 2021
-									</p>
 								</div>
 							</div>
 							<div class="card-body p-3">
 								<div class="chart">
-									<canvas class="chart-line" class="chart-canvas" height="300"></canvas>
+									<canvas class="chart-line" class="chart-canvas" height="500"></canvas>
 								</div>
 							</div>
 						</div>
