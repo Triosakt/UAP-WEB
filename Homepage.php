@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
     <title>Dashboard Rental PS</title>
+
     <style>
-        @font-face {
-            font-family: 'GameFont';
-            src: url('path-to-your-font.ttf') format('truetype'); /* Ganti path sesuai dengan lokasi font Anda */
-        }
+        
 
         body, html {
             margin: 0;
@@ -20,7 +19,10 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            font-family: 'Quicksand', sans-serif;
         }
+      
+
 
         .background {
             position: absolute;
@@ -61,7 +63,7 @@
         .content h1 {
             margin: 0 0 20px;
             font-size: 3em;
-            color: #FFFF00; /* Warna teks putih */
+            color: #00BFFF; /* Warna teks putih */
             font-family: 'GameFont', sans-serif; /* Menggunakan font GameFont yang diimpor */
             font-weight: bold; /* Menjadikan teks "Selamat Datang di PSphere" menjadi bold */
             animation: animateTyping 4s steps(40) both; /* Animasi teks bergerak mengetik */
