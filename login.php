@@ -8,12 +8,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <style>
+        .bg{
+            background-image: url(../UAP-WEB/img/bgpls1.jpg);
+            background-size: cover;
+        }
+    </style>
 </head>
-<body id="bg-login">
+<body class="bg">
     <div class="container">
         <div class="row justify-content-center align-items-center min-vh-100">
             <div class="col-lg-4 col-md-6 col-sm-8">
-                <div class="card shadow">
+                <div class="card shadow" style="background: #343a40; color:white">
                     <div class="card-body">
                         <h2 class="text-center mb-4">Login</h2>
                         <form action="" method="POST">
