@@ -64,7 +64,7 @@
             color: #FFFF00; /* Warna teks putih */
             font-family: 'GameFont', sans-serif; /* Menggunakan font GameFont yang diimpor */
             font-weight: bold; /* Menjadikan teks "Selamat Datang di PSphere" menjadi bold */
-            animation: animateTyping 4s steps(40) infinite; /* Animasi teks bergerak mengetik */
+            animation: animateTyping 4s steps(40) both; /* Animasi teks bergerak mengetik */
         }
 
         .content p {
